@@ -31,7 +31,7 @@ void loadConfig() {
         userConfig.manualPort = 17091;
         asprintf(&userConfig.manualMeta, "localhost");
         userConfig.usingNewPacket = 1;
-        userConfig.httpsPort = 443;
+        userConfig.httpsPort = 17091;
         userConfig.skipGazette = 1;
         userConfig.isSpoofed = 0;
 
