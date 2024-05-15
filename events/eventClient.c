@@ -97,8 +97,8 @@ void clientReceive(ENetEvent event, ENetPeer* clientPeer, ENetPeer* serverPeer) 
             if ((packetText + 19)[0] == '/') {
                 // command here
                 char** command = strsplit(packetText + 19, " ", 0);
-                if (isStr(command[0], "/proxyhelp", 1)) {
-                    sendPacket(3, "action|log\nmsg|>> Commands: /helloworld /testarg <your arg> /testdialog /warp <name world> /netid /changename <Name> /fastroulette", clientPeer);
+                if (isStr(command[0], "/proxy", 1)) {
+                    sendPacket(3, "action|log\nmsg|>> Commands: /helloworld /testarg <your arg> /testdialog /warp <name world> /netid /changename <Name> /fr", clientPeer);
                 }
                 else if (isStr(command[0], "/helloworld", 1)) {
                     sendPacket(3, "action|log\nmsg|`2Hello World", clientPeer);
@@ -125,7 +125,7 @@ void clientReceive(ENetEvent event, ENetPeer* clientPeer, ENetPeer* serverPeer) 
                     }
                     enet_peerSend(onPacketCreate(OnSpawn.LocalNetid, 0, "ss", "OnNameChanged", command[1]), clientPeer);
                 }
-                else if (isStr(command[0], "/warp", 1)) {
+                else if (isStr(command[0], "/wp", 1)) {
                     if (!command[1]) {
                         sendPacket(3, "action|log\nmsg|Please input world name", clientPeer);
                         free(command); // prevent memleak
@@ -133,7 +133,7 @@ void clientReceive(ENetEvent event, ENetPeer* clientPeer, ENetPeer* serverPeer) 
                     }
                     sendPacket(3, CatchMessage("action|join_request\nname|%s\ninvitedWorld|0", command[1]), serverPeer);
                 }
-                else if (isStr(command[0], "/fastroulette", 1)) {
+                else if (isStr(command[0], "/fr", 1)) {
                     if (userOpt.isFastRoulette) {
                         userOpt.isFastRoulette = 0;
                         sendPacket(3, "action|log\nmsg|`wFast roulette is `4turning off`w, type /fastroulette to `2turning on", clientPeer);
